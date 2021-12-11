@@ -1,14 +1,14 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "../account/login";
+import Home from "../pages/home";
 
-
-export default function AuthenticatedRouter():JSX.Element {
-    return (
-      <BrowserRouter>
-        <Routes>
-            <Route path="/" element={<Login />} />
-
-        </Routes>
-      </BrowserRouter>
-    );
+export default function AuthenticatedRouter(): JSX.Element {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/home" element={<Home />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
