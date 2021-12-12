@@ -4,6 +4,8 @@ import Register from "../account/register";
 import Home from "../pages/home";
 
 export default function AuthenticatedRouter(): JSX.Element {
+
+
   return (
     <BrowserRouter>
       <Routes>
