@@ -84,7 +84,7 @@ export default function Register(): JSX.Element {
   return (
     <div>
       <form onSubmit={onSubmit} className="w-1/2 m-auto p-4">
-            <h2 className="text-white text-center text-2xl">Register</h2>
+        <h2 className="text-white text-center text-2xl">Register</h2>
         <div className="w-4/6 text-right p-4">
           <div className="p-2 ">
             <label className="text-white mr-2">Username</label>
@@ -96,7 +96,7 @@ export default function Register(): JSX.Element {
               type="text"
             />
           </div>
-          <div className="p-2" >
+          <div className="p-2">
             <label className="text-white mr-2">Password</label>
             <input
               className="bg-gray-200 border border-black"
