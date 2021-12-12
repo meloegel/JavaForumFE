@@ -1,34 +1,37 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
+import { useEffect, useState } from "react";
 import Button from "../common/button";
-import useFetch from "../hooks/useFetch";
-import loginSchema from "../validation/loginSchema";
+import registrationSchema from "../validation/registrationSchema";
+import { useNavigate } from "react-router-dom";
 
 const initialFormValues = {
   username: "",
   password: "",
+  email: "",
 };
 
 const initialFormErrors = {
   username: "",
   password: "",
+  email: "",
 };
-
 const initialDisabled = true;
 
-export default function Login(): JSX.Element {
+export default function Register(): JSX.Element {
   const navigate = useNavigate();
   const [formValues, setFormValues] = useState(initialFormValues);
   const [formErrors, setFormErrors] = useState(initialFormErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
-  const [request, data] = useFetch<any>();
+
+  const onSubmit = (evt: any) => {
+    evt.preventDefault();
+  };
 
   const onInputChange = (evt: any) => {
     const name = evt.target.name;
     const value = evt.target.value;
     yup
-      .reach(loginSchema, name)
+      .reach(registrationSchema, name)
       .validate(value)
       .then((valid: any) => {
         setFormErrors({
@@ -48,37 +51,8 @@ export default function Login(): JSX.Element {
     });
   };
 
-  const onSubmit = (evt: any) => {
-    evt.preventDefault();
-    const body = {
-      grant_type: "password",
-      username: formValues.username,
-      password: formValues.password,
-    };
-    const headers = {
-      "Content-Type": "application/x-www-form-urlencoded",
-      Authorization: `Basic ${btoa("lambda-client:lambda-secret")}`,
-    };
-    const grant_type = `?grant_type=password&username=${formValues.username}&password=${formValues.password}`;
-
-    request(`http://localhost:2019/login${grant_type}`, {
-      method: "POST",
-      body: JSON.stringify(body),
-      headers: headers,
-    });
-  };
-
-    useEffect(() => {
-      if (data) {
-        console.log("Success");
-        localStorage.setItem("username", `${formValues.username}`);
-        localStorage.setItem("token", `Bearer ${data.access_token}`);
-        navigate("/home");
-      }
-    }, [data, navigate, formValues]);
-
   useEffect(() => {
-    loginSchema.isValid(formValues).then((valid: any) => {
+    registrationSchema.isValid(formValues).then((valid: any) => {
       setDisabled(!valid);
     });
   }, [formValues]);
@@ -86,7 +60,6 @@ export default function Login(): JSX.Element {
   return (
     <div>
       <form onSubmit={onSubmit} className="w-1/2 m-auto p-4">
-        <h2>Login</h2>
         <div>
           <div>
             <label>Username</label>
@@ -108,22 +81,35 @@ export default function Login(): JSX.Element {
               type="text"
             />
           </div>
+          <div>
+            <label>Email</label>
+            <input
+              className=""
+              value={formValues.email}
+              onChange={onInputChange}
+              name="email"
+              type="text"
+            />
+          </div>
         </div>
         <div>
           <div>{formErrors.username}</div>
           <div>{formErrors.password}</div>
+          <div>{formErrors.email}</div>
         </div>
         <div>
           <Button
-            text="Login"
+            text="Register"
             disabled={disabled}
             className=""
             onClick={() => {}}
           />
           <Button
-            text="Register"
+            text="Login"
             className=""
-            onClick={() => {navigate("/register")}}
+            onClick={() => {
+              navigate("/");
+            }}
           />
         </div>
       </form>
