@@ -86,22 +86,22 @@ export default function Login(): JSX.Element {
   return (
     <div>
       <form onSubmit={onSubmit} className="w-1/2 m-auto p-4">
-        <h2>Login</h2>
-        <div>
-          <div>
-            <label>Username</label>
+        <h2 className="text-white text-center text-2xl">Login</h2>
+        <div className="w-4/6 text-right p-4">
+          <div className="p-2">
+            <label className="text-white mr-2">Username</label>
             <input
-              className=""
+              className="bg-gray-200 border border-black m-2"
               value={formValues.username}
               onChange={onInputChange}
               name="username"
               type="text"
             />
           </div>
-          <div>
-            <label>Password</label>
+          <div className="p-2">
+            <label className="text-white mr-2">Password</label>
             <input
-              className=""
+              className="bg-gray-200 border border-black m-2"
               value={formValues.password}
               onChange={onInputChange}
               name="password"
@@ -113,16 +113,16 @@ export default function Login(): JSX.Element {
           <div>{formErrors.username}</div>
           <div>{formErrors.password}</div>
         </div>
-        <div>
+        <div className="flex justify-evenly p-6">
           <Button
             text="Login"
             disabled={disabled}
-            className=""
+            className="text-white"
             onClick={() => {}}
           />
           <Button
             text="Register"
-            className=""
+            className="text-white"
             onClick={() => {navigate("/register")}}
           />
         </div>

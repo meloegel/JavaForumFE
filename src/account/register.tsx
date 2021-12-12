@@ -84,31 +84,32 @@ export default function Register(): JSX.Element {
   return (
     <div>
       <form onSubmit={onSubmit} className="w-1/2 m-auto p-4">
-        <div>
-          <div>
-            <label>Username</label>
+            <h2 className="text-white text-center text-2xl">Register</h2>
+        <div className="w-4/6 text-right p-4">
+          <div className="p-2 ">
+            <label className="text-white mr-2">Username</label>
             <input
-              className=""
+              className="bg-gray-200 border border-black"
               value={formValues.username}
               onChange={onInputChange}
               name="username"
               type="text"
             />
           </div>
-          <div>
-            <label>Password</label>
+          <div className="p-2" >
+            <label className="text-white mr-2">Password</label>
             <input
-              className=""
+              className="bg-gray-200 border border-black"
               value={formValues.password}
               onChange={onInputChange}
               name="password"
               type="text"
             />
           </div>
-          <div>
-            <label>Email</label>
+          <div className="p-2">
+            <label className="text-white mr-2">Email</label>
             <input
-              className=""
+              className="bg-gray-200 border border-black"
               value={formValues.email}
               onChange={onInputChange}
               name="email"
@@ -121,16 +122,16 @@ export default function Register(): JSX.Element {
           <div>{formErrors.password}</div>
           <div>{formErrors.email}</div>
         </div>
-        <div>
+        <div className="flex justify-evenly p-6">
           <Button
             text="Register"
             disabled={disabled}
-            className=""
+            className="text-white"
             onClick={() => {}}
           />
           <Button
             text="Login"
-            className=""
+            className="text-white"
             onClick={() => {
               navigate("/");
             }}
