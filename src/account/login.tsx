@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
+import Button from "../common/button";
 import loginSchema from "../validation/loginSchema";
 
 const initialFormValues = {
@@ -84,7 +85,7 @@ export default function Login(): JSX.Element {
           </div>
         </div>
         <div>
-          <button disabled={disabled}>Login</button>
+          <Button text="Login" disabled={disabled} className="" />
         </div>
       </form>
     </div>
