@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Button from "../common/button";
 import registrationSchema from "../validation/registrationSchema";
 import { useNavigate } from "react-router-dom";
+import useFetch from "../hooks/useFetch";
 
 const initialFormValues = {
   username: "",
@@ -22,10 +23,33 @@ export default function Register(): JSX.Element {
   const [formValues, setFormValues] = useState(initialFormValues);
   const [formErrors, setFormErrors] = useState(initialFormErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
+  const [request, data] = useFetch<any>();
 
   const onSubmit = (evt: any) => {
     evt.preventDefault();
+    const body = {
+      username: formValues.username,
+      password: formValues.password,
+      email: formValues.email,
+    };
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Basic ${btoa("lambda-client:lambda-secret")}`,
+    };
+    request(`http://localhost:2019/createNewUser`, {
+      method: "POST",
+      body: JSON.stringify(body),
+      headers: headers,
+    });
   };
+
+  useEffect(() => {
+    if (data) {
+      console.log("Success");
+      localStorage.setItem("token", `Bearer ${data.access_token}`);
+      navigate("/home");
+    }
+  }, [data, navigate, formValues]);
 
   const onInputChange = (evt: any) => {
     const name = evt.target.name;
