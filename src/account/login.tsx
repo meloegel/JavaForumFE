@@ -68,14 +68,14 @@ export default function Login(): JSX.Element {
     });
   };
 
-    useEffect(() => {
-      if (data) {
-        console.log("Success");
-        localStorage.setItem("username", `${formValues.username}`);
-        localStorage.setItem("token", `Bearer ${data.access_token}`);
-        navigate("/home");
-      }
-    }, [data, navigate, formValues]);
+  useEffect(() => {
+    if (data) {
+      console.log("Success");
+      localStorage.setItem("username", `${formValues.username}`);
+      localStorage.setItem("token", `Bearer ${data.access_token}`);
+      navigate("/home");
+    }
+  }, [data, navigate, formValues]);
 
   useEffect(() => {
     loginSchema.isValid(formValues).then((valid: any) => {
@@ -123,7 +123,9 @@ export default function Login(): JSX.Element {
           <Button
             text="Register"
             className="text-white"
-            onClick={() => {navigate("/register")}}
+            onClick={() => {
+              navigate("/register");
+            }}
           />
         </div>
       </form>
