@@ -1,6 +1,6 @@
-import { request } from "https";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Button from "../common/button";
 import useFetch from "../hooks/useFetch";
 
 const initialFormValues = {
@@ -8,18 +8,16 @@ const initialFormValues = {
   topicbody: "",
   topicphoto: "",
   topicvideo: "",
-  topiclink: "",
-  nsfw: false,
-  user: "",
+  topiclink: ""
 };
 
 export default function AddTopic(): JSX.Element {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const [formValues, setFormValues] = useState(initialFormValues);
   const [getUserID, dataUser] = useFetch<any>();
-  const [postNewTopic, dataTopic] = useFetch<any>();
+  const [postNewTopic, ] = useFetch<any>();
   const [nsfw, setNsfw] = useState(false);
-  const [userId, setUserId] = useState(0)
+  const [userId, setUserId] = useState(0);
   const username = window.localStorage.getItem("username");
   const token = window.localStorage.getItem("token");
 
@@ -34,24 +32,29 @@ export default function AddTopic(): JSX.Element {
 
   const handleNsfw = (evt: any) => {
     setNsfw(!nsfw);
-    setFormValues({
-      ...formValues,
-      nsfw: nsfw,
-    });
-    console.log(formValues);
   };
 
-  const onSubmit = (evt:any) => {
+  const onSubmit = (evt: any) => {
     evt.preventDefault();
     const headers = {
       "Content-Type": "application/json",
       Authorization: token!,
     };
+    const body = {
+      topicname: formValues.topicname,
+      topicbody: formValues.topicbody,
+      topicphoto: formValues.topicphoto,
+      topicvideo: formValues.topicvideo,
+      topiclink: formValues.topiclink,
+      nsfw: nsfw,
+    };
     postNewTopic(`http://localhost:2019/topics/${userId}/topic`, {
-        method:"POST",
-        headers:headers
-    })
-  }
+      method: "POST",
+      body: JSON.stringify(body),
+      headers: headers,
+    });
+     navigate("/home");
+  };
 
   useEffect(() => {
     const headers = {
@@ -66,11 +69,9 @@ export default function AddTopic(): JSX.Element {
 
   useEffect(() => {
     if (dataUser) {
-        setUserId(dataUser.userid)
-    } else if (dataTopic) {
-        navigate("/home")
+      setUserId(dataUser.userid);
     }
-  }, [dataUser, dataTopic, navigate])
+  }, [dataUser]);
 
   return (
     <div>
@@ -131,7 +132,7 @@ export default function AddTopic(): JSX.Element {
             <label>Nsfw</label>
             <input
               className=""
-              value={formValues.nsfw.toString()}
+              value={nsfw.toString()}
               onChange={handleNsfw}
               name="nsfw"
               type="checkbox"
@@ -139,6 +140,7 @@ export default function AddTopic(): JSX.Element {
             />
           </div>
         </div>
+        <Button text="Submit" className="text-white" onClick={() => {}} />
       </form>
     </div>
   );
