@@ -14,8 +14,7 @@ const initialFormValues = {
 export default function AddTopic(): JSX.Element {
   const navigate = useNavigate();
   const [formValues, setFormValues] = useState(initialFormValues);
-  const [getUserID, dataUser] = useFetch<any>();
-  const [postNewTopic, ] = useFetch<any>();
+  const [request, data] = useFetch<any>();
   const [nsfw, setNsfw] = useState(false);
   const [userId, setUserId] = useState(0);
   const username = window.localStorage.getItem("username");
@@ -48,7 +47,7 @@ export default function AddTopic(): JSX.Element {
       topiclink: formValues.topiclink,
       nsfw: nsfw,
     };
-    postNewTopic(`http://localhost:2019/topics/${userId}/topic`, {
+    request(`http://localhost:2019/topics/${userId}/topic`, {
       method: "POST",
       body: JSON.stringify(body),
       headers: headers,
@@ -61,17 +60,17 @@ export default function AddTopic(): JSX.Element {
       "Content-Type": "application/json",
       Authorization: token!,
     };
-    getUserID(`http://localhost:2019/users/user/name/${username}`, {
+    request(`http://localhost:2019/users/user/name/${username}`, {
       method: "GET",
       headers: headers,
     });
-  }, [getUserID, token, username]);
+  }, [request, token, username]);
 
   useEffect(() => {
-    if (dataUser) {
-      setUserId(dataUser.userid);
+    if (data) {
+      setUserId(data.userid);
     }
-  }, [dataUser]);
+  }, [data]);
 
   return (
     <div>
