@@ -8,7 +8,7 @@ const initialFormValues = {
   topicbody: "",
   topicphoto: "",
   topicvideo: "",
-  topiclink: ""
+  topiclink: "",
 };
 
 export default function AddTopic(): JSX.Element {
@@ -52,7 +52,7 @@ export default function AddTopic(): JSX.Element {
       body: JSON.stringify(body),
       headers: headers,
     });
-     navigate("/home");
+    navigate("/home");
   };
 
   useEffect(() => {

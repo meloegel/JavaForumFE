@@ -60,6 +60,11 @@ export default function Home(): JSX.Element {
         className="text-white"
         onClick={() => navigate("/add-topic")}
       />
+      <Button
+        text="Profile"
+        className="text-white"
+        onClick={() => navigate("/profile")}
+      />
     </div>
   );
 }

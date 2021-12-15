@@ -3,6 +3,7 @@ import Login from "../account/login";
 import Register from "../account/register";
 import AddTopic from "../pages/addTopic";
 import Home from "../pages/home";
+import Profile from '../account/profile';
 
 export default function AuthenticatedRouter(): JSX.Element {
   return (
@@ -12,6 +13,7 @@ export default function AuthenticatedRouter(): JSX.Element {
         <Route path="/register" element={<Register />} />
         <Route path="/home" element={<Home />} />
         <Route path="/add-topic" element={<AddTopic />} />
+        <Route path='/profile' element={<Profile />} />
       </Routes>
     </BrowserRouter>
   );
