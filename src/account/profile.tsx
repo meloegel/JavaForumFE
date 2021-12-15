@@ -11,6 +11,8 @@ const initialFormValues = {
 export default function Profile(): JSX.Element {
   const [formValues, setFormValues] = useState(initialFormValues);
   const [getUserInfo, userInfo] = useFetch<any>();
+  const [setUserInfo, newUserInfo] = useFetch<any>();
+  const [userId, setUserId] = useState(0);
   const username = window.localStorage.getItem("username");
   const token = window.localStorage.getItem("token");
 
@@ -20,6 +22,24 @@ export default function Profile(): JSX.Element {
     setFormValues({
       ...formValues,
       [name]: value,
+    });
+  };
+
+  const onSubmit = (evt: any) => {
+    evt.preventDefault();
+    const body = {
+      username: formValues.username,
+      password: formValues.password,
+      email: formValues.email,
+    };
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: token!,
+    };
+    setUserInfo(`http://localhost:2019/users/user/${userId}`, {
+      method: "PATCH",
+      body: JSON.stringify(body),
+      headers: headers,
     });
   };
 
@@ -37,12 +57,21 @@ export default function Profile(): JSX.Element {
   useEffect(() => {
     if (userInfo) {
       setFormValues(userInfo);
+      setUserId(userInfo.userid);
+      console.log(userInfo.userid);
     }
   }, [userInfo]);
 
+  useEffect(() => {
+    if (newUserInfo) {
+      setFormValues(newUserInfo);
+      window.localStorage.setItem("username", newUserInfo.username);
+    }
+  }, [newUserInfo]);
+
   return (
     <div>
-      <form>
+      <form onSubmit={onSubmit}>
         <h2>Profile</h2>
         <div>
           <div className="p-2 ">
