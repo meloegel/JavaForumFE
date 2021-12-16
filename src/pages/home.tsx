@@ -10,8 +10,9 @@ export default function Home(): JSX.Element {
   const [request, data] = useFetch<any>();
   const token = window.localStorage.getItem("token");
 
-  const handleLogout = (evt: any) => {
-    window.localStorage.clear();
+  const handleLogout = () => {
+    console.log("fire");
+    localStorage.clear();
     navigate("/");
   };
 
@@ -35,12 +36,7 @@ export default function Home(): JSX.Element {
 
   return (
     <div>
-      <Button
-        text="Logout"
-        className="text-white"
-        onClick={() => handleLogout}
-      />
-      <h2 className="text-white text-center text-2xl">Topics</h2>
+      <h2 className="text-white text-center text-2xl p-4">Topics</h2>
       {topics !== []
         ? topics.map((topic, key): any => (
             <TopicCard
@@ -55,16 +51,23 @@ export default function Home(): JSX.Element {
             />
           ))
         : null}
-      <Button
-        text="Add Topic"
-        className="text-white"
-        onClick={() => navigate("/add-topic")}
-      />
-      <Button
-        text="Profile"
-        className="text-white"
-        onClick={() => navigate("/profile")}
-      />
+      <div className="flex justify-evenly w-1/3 m-auto p-4">
+        <Button
+          text="Add Topic"
+          className="text-white"
+          onClick={() => navigate("/add-topic")}
+        />
+        <Button
+          text="Profile"
+          className="text-white"
+          onClick={() => navigate("/profile")}
+        />
+        <Button
+          text="Logout"
+          className="text-white"
+          onClick={() => handleLogout}
+        />
+      </div>
     </div>
   );
 }
