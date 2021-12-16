@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../common/button";
 import useFetch from "../hooks/useFetch";
 
@@ -9,6 +10,7 @@ const initialFormValues = {
 };
 
 export default function Profile(): JSX.Element {
+  const navigate = useNavigate();
   const [formValues, setFormValues] = useState(initialFormValues);
   const [getUserInfo, userInfo] = useFetch<any>();
   const [setUserInfo, newUserInfo] = useFetch<any>();
@@ -71,10 +73,10 @@ export default function Profile(): JSX.Element {
 
   return (
     <div>
-      <form onSubmit={onSubmit}>
-        <h2>Profile</h2>
-        <div>
-          <div className="p-2 ">
+      <form onSubmit={onSubmit} className="m-auto ">
+        <h2 className="text-white text-3xl p-6">Profile</h2>
+        <div className="p-4 text-left ">
+          <div className="p-2 flex flex-col w-1/4">
             <label className="text-white mr-2">Username</label>
             <input
               className="bg-gray-200 border border-black"
@@ -84,7 +86,7 @@ export default function Profile(): JSX.Element {
               type="text"
             />
           </div>
-          <div className="p-2">
+          <div className="p-2 flex flex-col w-1/4">
             <label className="text-white mr-2">Password</label>
             <input
               className="bg-gray-200 border border-black"
@@ -94,7 +96,7 @@ export default function Profile(): JSX.Element {
               type="text"
             />
           </div>
-          <div className="p-2">
+          <div className="p-2 flex flex-col w-1/4">
             <label className="text-white mr-2">Email</label>
             <input
               className="bg-gray-200 border border-black"
@@ -105,7 +107,14 @@ export default function Profile(): JSX.Element {
             />
           </div>
         </div>
-        <Button text="Submit" className="text-white" onClick={() => {}} />
+        <div className="px-6 py-2 flex justify-evenly w-1/4">
+          <Button text="Submit" className="text-white" onClick={() => {}} />
+          <Button
+            text="Home"
+            className="text-white"
+            onClick={() => navigate("/home")}
+          />
+        </div>
       </form>
     </div>
   );
