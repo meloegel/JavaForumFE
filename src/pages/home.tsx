@@ -8,11 +8,19 @@ export default function Home(): JSX.Element {
   const navigate = useNavigate();
   const [topics, setTopics] = useState([] as any[]);
   const [request, data] = useFetch<any>();
+  const [logout, response] = useFetch<any>();
   const token = window.localStorage.getItem("token");
 
   const handleLogout = () => {
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: token!,
+    };
     console.log("fire");
-    localStorage.clear();
+    logout("http://localhost:2019/logout", {
+      method: "GET",
+      headers: headers,
+    });
     navigate("/");
   };
 
@@ -62,11 +70,7 @@ export default function Home(): JSX.Element {
           className="text-white"
           onClick={() => navigate("/profile")}
         />
-        <Button
-          text="Logout"
-          className="text-white"
-          onClick={() => handleLogout}
-        />
+        <Button text="Logout" className="text-white" onClick={handleLogout} />
       </div>
     </div>
   );

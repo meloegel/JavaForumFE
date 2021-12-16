@@ -87,7 +87,7 @@ export default function Profile(): JSX.Element {
             />
           </div>
           <div className="p-2 flex flex-col w-1/4">
-            <label className="text-white mr-2">Password</label>
+            <label className="text-white mr-2">Password </label>
             <input
               className="bg-gray-200 border border-black"
               value={formValues.password}
@@ -95,6 +95,7 @@ export default function Profile(): JSX.Element {
               name="password"
               type="text"
             />
+            <span className="text-xs text-white">**Current password will not be displayed for security reasons**</span>
           </div>
           <div className="p-2 flex flex-col w-1/4">
             <label className="text-white mr-2">Email</label>
