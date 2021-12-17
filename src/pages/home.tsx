@@ -24,6 +24,10 @@ export default function Home(): JSX.Element {
     navigate("/");
   };
 
+  const handleOnClick = (id: number) => {
+    navigate(`/forum/${id}`)
+  }
+
   useEffect(() => {
     const headers = {
       "Content-Type": "application/json",
@@ -56,6 +60,7 @@ export default function Home(): JSX.Element {
               topiclink={topic.topiclink}
               nsfw={topic.nsfw}
               user={topic.user.username}
+              onClick={() => handleOnClick(topic.topicid)}
             />
           ))
         : null}
