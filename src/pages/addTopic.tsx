@@ -74,63 +74,63 @@ export default function AddTopic(): JSX.Element {
 
   return (
     <div>
-      <form onSubmit={onSubmit}>
-        <h2>Add Topic</h2>
-        <div>
-          <div>
-            <label>Topic Name</label>
+      <form onSubmit={onSubmit} className="m-auto">
+        <h2 className="text-white text-3xl p-6">Add Topic</h2>
+        <div className="p-4 text-left ">
+          <div className="p-2 flex flex-col w-1/4">
+            <label className="text-white mr-2">Topic Name</label>
             <input
-              className=""
+              className="bg-gray-200 border border-black"
               value={formValues.topicname}
               onChange={onInputChange}
               name="topicname"
               type="text"
             />
           </div>
-          <div>
-            <label>Topic Body</label>
+          <div className="p-2 flex flex-col w-1/4">
+            <label className="text-white mr-2">Topic Body</label>
             <input
-              className=""
+              className="bg-gray-200 border border-black"
               value={formValues.topicbody}
               onChange={onInputChange}
               name="topicbody"
               type="text"
             />
           </div>
-          <div>
-            <label>Topic Photo</label>
+          <div className="p-2 flex flex-col w-1/4">
+            <label className="text-white mr-2">Topic Photo</label>
             <input
-              className=""
+              className="bg-gray-200 border border-black"
               value={formValues.topicphoto}
               onChange={onInputChange}
               name="topicphoto"
               type="text"
             />
           </div>
-          <div>
-            <label>Topic Video</label>
+          <div className="p-2 flex flex-col w-1/4">
+            <label className="text-white mr-2">Topic Video</label>
             <input
-              className=""
+              className="bg-gray-200 border border-black"
               value={formValues.topicvideo}
               onChange={onInputChange}
               name="topicvideo"
               type="text"
             />
           </div>
-          <div>
-            <label>Topic Link</label>
+          <div className="p-2 flex flex-col w-1/4">
+            <label className="text-white mr-2">Topic Link</label>
             <input
-              className=""
+              className="bg-gray-200 border border-black"
               value={formValues.topiclink}
               onChange={onInputChange}
               name="topiclink"
               type="text"
             />
           </div>
-          <div>
-            <label>Nsfw</label>
+          <div className="p-2 flex flex-col w-1/4">
+            <label className="text-white mr-2">Nsfw</label>
             <input
-              className=""
+              className="bg-gray-200 border border-black"
               value={nsfw.toString()}
               onChange={handleNsfw}
               name="nsfw"
@@ -139,7 +139,14 @@ export default function AddTopic(): JSX.Element {
             />
           </div>
         </div>
-        <Button text="Submit" className="text-white" onClick={() => {}} />
+        <div className="px-6 py-2 flex justify-evenly w-1/4">
+          <Button text="Submit" className="text-white" onClick={() => {}} />
+          <Button
+            text="Home"
+            className="text-white"
+            onClick={() => navigate("/home")}
+          />
+        </div>
       </form>
     </div>
   );

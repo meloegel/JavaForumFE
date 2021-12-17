@@ -8,7 +8,7 @@ export default function Home(): JSX.Element {
   const navigate = useNavigate();
   const [topics, setTopics] = useState([] as any[]);
   const [request, data] = useFetch<any>();
-  const [logout, response] = useFetch<any>();
+  const [logout, ] = useFetch<any>();
   const token = window.localStorage.getItem("token");
 
   const handleLogout = () => {
