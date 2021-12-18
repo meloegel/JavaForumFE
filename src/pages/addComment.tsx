@@ -14,9 +14,11 @@ export default function AddComment(): JSX.Element {
   const navigate = useNavigate();
   const [userId, setUserId] = useState(0);
   const [formValues, setFormValues] = useState(initialFormValues);
-  const [request, data] = useFetch<any>();
+  const [getUserData, userData] = useFetch<any>();
+  const [addComment, commentData] = useFetch<any>();
   const username = window.localStorage.getItem("username");
   const token = window.localStorage.getItem("token");
+  const topicid = window.location.href.split("/").slice(-1)[0];
 
   const onInputChange = (evt: any) => {
     const name = evt.target.name;
@@ -27,27 +29,51 @@ export default function AddComment(): JSX.Element {
     });
   };
 
+  const onSubmit = (evt: any) => {
+    evt.preventDefault();
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: token!,
+    };
+    const body = {
+      commentbody: formValues.commentbody,
+      commentphoto: formValues.commentphoto,
+      commentvideo: formValues.commentvideo,
+      commentgif: formValues.commentgif,
+    };
+    addComment(`http://localhost:2019/comments/${userId}/${topicid}/comment`, {
+      method: "POST",
+      body: JSON.stringify(body),
+      headers: headers,
+    });
+  };
+
   useEffect(() => {
     const headers = {
       "Content-Type": "application/json",
       Authorization: token!,
     };
-    request(`http://localhost:2019/users/user/name/${username}`, {
+    getUserData(`http://localhost:2019/users/user/name/${username}`, {
       method: "GET",
       headers: headers,
     });
-  }, [request, token, username]);
+  }, [getUserData, token, username]);
 
   useEffect(() => {
-    if (data) {
-      setUserId(data.userid);
+    if (userData) {
+      setUserId(userData.userid);
     }
-  }, [data]);
+  }, [userData]);
 
+  useEffect(() => {
+    if (commentData) {
+      navigate(`/forum/${topicid}`);
+    }
+  }, [commentData, navigate, topicid]);
 
   return (
     <div>
-      <form className="m-auto">
+      <form onSubmit={onSubmit} className="m-auto">
         <h2 className="text-white text-3xl p-6">Add Comment</h2>
         <div className="p-4 text-left ">
           <div className="p-2 flex flex-col w-1/4">

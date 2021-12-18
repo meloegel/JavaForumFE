@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Button from "../common/button";
 import CommentCard from "../common/commentCard";
 import TopicCard from "../common/topicCard";
 import useFetch from "../hooks/useFetch";
@@ -15,8 +17,8 @@ const initialTopicValues = {
   },
 };
 
-
 export default function TopicForum(): JSX.Element {
+  const navigate = useNavigate();
   const [topic, setTopic] = useState(initialTopicValues);
   const [comments, setComments] = useState([] as any[]);
   const token = window.localStorage.getItem("token");
@@ -80,7 +82,14 @@ export default function TopicForum(): JSX.Element {
           user={topic.user.username}
         />
       ) : null}
-       {comments !== []
+      <div className="text-center">
+        <Button
+          text="Add Comment"
+          className="text-white"
+          onClick={() => navigate(`/add-comment/${topicid}`)}
+        />
+      </div>
+      {comments !== []
         ? comments.map((comment, key): any => (
             <CommentCard
               key={key}
