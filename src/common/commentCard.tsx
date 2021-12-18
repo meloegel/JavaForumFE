@@ -14,7 +14,7 @@ export default function CommentCard({
   user,
 }: CommentCardType): JSX.Element {
   return (
-    <div>
+    <div  className="bg-gray-900 p-4 w-1/5 mx-auto my-4 text-white text-lg">
       <p>
         Comment Body:{" "}
         <span className="text-2xl font-medium">{commentbody}</span>
