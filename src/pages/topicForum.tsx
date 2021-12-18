@@ -68,7 +68,7 @@ export default function TopicForum(): JSX.Element {
 
   return (
     <div>
-      <h2>Forum</h2>
+      <h2 className="text-white text-center text-2xl p-4">Forum</h2>
       {topic.topicname !== "" ? (
         <TopicCard
           topicname={topic.topicname}
