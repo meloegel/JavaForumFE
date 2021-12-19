@@ -52,13 +52,8 @@ export default function UserTopics(): JSX.Element {
   }, [userTopics]);
 
   return (
-    <div className="text-center">
-      <h2 className="text-white text-3xl p-6">User Topics</h2>
-      <Button
-        text="Home"
-        className="text-white"
-        onClick={() => navigate("/home")}
-      />
+    <div className="">
+      <h2 className="text-white text-3xl p-6 text-center">User Topics</h2>
       {topics !== []
         ? topics.map((topic, key): any => (
             <TopicCard
@@ -74,6 +69,13 @@ export default function UserTopics(): JSX.Element {
             />
           ))
         : null}
+      <div className="text-center p-4">
+        <Button
+          text="Home"
+          className="text-white"
+          onClick={() => navigate("/home")}
+        />
+      </div>
     </div>
   );
 }
