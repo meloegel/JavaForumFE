@@ -75,6 +75,11 @@ export default function Home(): JSX.Element {
           className="text-white"
           onClick={() => navigate("/profile")}
         />
+         <Button
+            text="My Topics"
+            className="text-white"
+            onClick={() => navigate("/user-topics")}
+          />
         <Button text="Logout" className="text-white" onClick={handleLogout} />
       </div>
     </div>
