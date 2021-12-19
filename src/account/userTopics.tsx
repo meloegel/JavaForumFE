@@ -52,8 +52,8 @@ export default function UserTopics(): JSX.Element {
   }, [userTopics]);
 
   return (
-    <div>
-      <h2>User Topics</h2>
+    <div className="text-center">
+      <h2 className="text-white text-3xl p-6">User Topics</h2>
       <Button
         text="Home"
         className="text-white"
