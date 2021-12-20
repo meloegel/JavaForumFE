@@ -37,7 +37,7 @@ export default function UserTopics(): JSX.Element {
       headers: headers,
     });
     setConfirm(!confirm);
-    // need to configured backend to delete all comments before deleting topic
+    // need to configured backend to delete all comments for topic before deleting topic
   };
 
   useEffect(() => {
