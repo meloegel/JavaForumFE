@@ -13,8 +13,12 @@ export default function UserTopics(): JSX.Element {
   const username = window.localStorage.getItem("username");
   const token = window.localStorage.getItem("token");
 
-  const handleOnClick = (id: number) => {
+  const handleOnTopicClick = (id: number) => {
     navigate(`/forum/${id}`);
+  };
+
+  const handleOnDeleteClick = (topicid: number) => {
+    console.log(topicid);
   };
 
   useEffect(() => {
@@ -56,17 +60,26 @@ export default function UserTopics(): JSX.Element {
       <h2 className="text-white text-3xl p-6 text-center">User Topics</h2>
       {topics !== []
         ? topics.map((topic, key): any => (
-            <TopicCard
-              key={key}
-              topicname={topic.topicname}
-              topicbody={topic.topicbody}
-              topicphoto={topic.topicphoto}
-              topicvideo={topic.topicvideo}
-              topiclink={topic.topiclink}
-              nsfw={topic.nsfw}
-              user={topic.user.username}
-              onClick={() => handleOnClick(topic.topicid)}
-            />
+            <div className="flex flex-col">
+              <TopicCard
+                key={key}
+                topicname={topic.topicname}
+                topicbody={topic.topicbody}
+                topicphoto={topic.topicphoto}
+                topicvideo={topic.topicvideo}
+                topiclink={topic.topiclink}
+                nsfw={topic.nsfw}
+                user={topic.user.username}
+                onClick={() => handleOnTopicClick(topic.topicid)}
+              />
+              <div className="m-auto">
+                <Button
+                  text="Delete"
+                  className="text-white"
+                  onClick={() => handleOnDeleteClick(topic.topicid)}
+                />
+              </div>
+            </div>
           ))
         : null}
       <div className="text-center p-4">
