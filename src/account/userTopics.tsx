@@ -109,7 +109,7 @@ export default function UserTopics(): JSX.Element {
       </div>
       {topics !== []
         ? topics.map((topic, key): any => (
-            <div className="flex flex-col p-2">
+            <div className="flex flex-col">
               <TopicCard
                 key={key}
                 topicname={topic.topicname}
