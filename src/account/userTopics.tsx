@@ -8,7 +8,7 @@ export default function UserTopics(): JSX.Element {
   const navigate = useNavigate();
   const [getUserInfo, userInfo] = useFetch<any>();
   const [getUserTopics, userTopics] = useFetch<any>();
-  const [deleteTopic, deleteTopicResp] = useFetch<any>();
+  const [deleteTopic] = useFetch<any>();
   const [topics, setTopics] = useState([] as any[]);
   const [userId, setUserId] = useState(0);
   const username = window.localStorage.getItem("username");
@@ -37,7 +37,7 @@ export default function UserTopics(): JSX.Element {
       headers: headers,
     });
     setConfirm(!confirm);
-    // need to configured backend to delete all comments for topic before deleting topic
+    window.location.reload();
   };
 
   useEffect(() => {
@@ -73,12 +73,6 @@ export default function UserTopics(): JSX.Element {
       setTopics(userTopics);
     }
   }, [userTopics]);
-
-  useEffect(() => {
-    if (deleteTopicResp) {
-      window.location.reload();
-    }
-  }, [deleteTopicResp]);
 
   return (
     <div className="">
