@@ -74,35 +74,41 @@ function Profile({
   nsfw,
   user,
   onClick,
-  onDeleteClick
+  onDeleteClick,
 }: TopicCardType): JSX.Element {
   return (
-    <div
-      className="bg-gray-800 p-4 w-1/5 mx-auto my-4 text-white text-lg"
-      onClick={onClick}
-    >
-    <FontAwesomeIcon icon={faTimes} className="p-2 z-0 float-right h-auto bg-red-600" size="3x" onClick={onDeleteClick} />
-      <h3>
-        Topic Name: <span className="text-2xl font-medium">{topicname}</span>
-      </h3>
-      <p>
-        Topic Body: <span className="text-2xl font-medium">{topicbody}</span>
-      </p>
-      <p>
-        Topic Photo: <span className="text-2xl font-medium">{topicphoto}</span>
-      </p>
-      <p>
-        Topic Video: <span className="text-2xl font-medium">{topicvideo}</span>
-      </p>
-      <p>
-        Topic Link: <span className="text-2xl font-medium">{topiclink}</span>
-      </p>
-      <p>
-        nsfw: <span className="text-2xl font-medium">{nsfw.toString()}</span>
-      </p>
-      <p>
-        User: <span className="text-2xl font-medium">{user}</span>
-      </p>
+    <div className="bg-gray-800 p-4 w-1/5 mx-auto my-4 text-white text-lg">
+      <FontAwesomeIcon
+        icon={faTimes}
+        className="p-2 z-0 float-right h-auto bg-red-600"
+        size="3x"
+        onClick={onDeleteClick}
+      />
+      <div onClick={onClick}>
+        <h3>
+          Topic Name: <span className="text-2xl font-medium">{topicname}</span>
+        </h3>
+        <p>
+          Topic Body: <span className="text-2xl font-medium">{topicbody}</span>
+        </p>
+        <p>
+          Topic Photo:{" "}
+          <span className="text-2xl font-medium">{topicphoto}</span>
+        </p>
+        <p>
+          Topic Video:{" "}
+          <span className="text-2xl font-medium">{topicvideo}</span>
+        </p>
+        <p>
+          Topic Link: <span className="text-2xl font-medium">{topiclink}</span>
+        </p>
+        <p>
+          nsfw: <span className="text-2xl font-medium">{nsfw.toString()}</span>
+        </p>
+        <p>
+          User: <span className="text-2xl font-medium">{user}</span>
+        </p>
+      </div>
     </div>
   );
 }

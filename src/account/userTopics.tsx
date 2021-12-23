@@ -112,7 +112,7 @@ export default function UserTopics(): JSX.Element {
               topiclink={topic.topiclink}
               nsfw={topic.nsfw}
               user={topic.user.username}
-              // onClick={() => handleOnTopicClick(topic.topicid)} //Both wont work with current design
+              onClick={() => handleOnTopicClick(topic.topicid)}
               onDeleteClick={() => handleOnDeleteClick(topic.topicid)}
               type="profile"
             />
