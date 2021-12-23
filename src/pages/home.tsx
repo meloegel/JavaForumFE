@@ -8,7 +8,7 @@ export default function Home(): JSX.Element {
   const navigate = useNavigate();
   const [topics, setTopics] = useState([] as any[]);
   const [request, data] = useFetch<any>();
-  const [logout, ] = useFetch<any>();
+  const [logout] = useFetch<any>();
   const token = window.localStorage.getItem("token");
 
   const handleLogout = () => {
@@ -25,8 +25,8 @@ export default function Home(): JSX.Element {
   };
 
   const handleOnClick = (id: number) => {
-    navigate(`/forum/${id}`)
-  }
+    navigate(`/forum/${id}`);
+  };
 
   useEffect(() => {
     const headers = {
@@ -61,6 +61,7 @@ export default function Home(): JSX.Element {
               nsfw={topic.nsfw}
               user={topic.user.username}
               onClick={() => handleOnClick(topic.topicid)}
+              type="default"
             />
           ))
         : null}
@@ -75,11 +76,11 @@ export default function Home(): JSX.Element {
           className="text-white"
           onClick={() => navigate("/profile")}
         />
-         <Button
-            text="My Topics"
-            className="text-white"
-            onClick={() => navigate("/user-topics")}
-          />
+        <Button
+          text="My Topics"
+          className="text-white"
+          onClick={() => navigate("/user-topics")}
+        />
         <Button text="Logout" className="text-white" onClick={handleLogout} />
       </div>
     </div>

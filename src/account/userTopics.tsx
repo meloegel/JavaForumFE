@@ -103,7 +103,7 @@ export default function UserTopics(): JSX.Element {
       </div>
       {topics !== []
         ? topics.map((topic, key): any => (
-            <div className="flex flex-col">
+            <div className="flex flex-col"> 
               <TopicCard
                 key={key}
                 topicname={topic.topicname}
@@ -114,8 +114,10 @@ export default function UserTopics(): JSX.Element {
                 nsfw={topic.nsfw}
                 user={topic.user.username}
                 onClick={() => handleOnTopicClick(topic.topicid)}
+                type="profile"
               />
               <div className="m-auto">
+             
                 <Button
                   text="Delete"
                   className="text-white"

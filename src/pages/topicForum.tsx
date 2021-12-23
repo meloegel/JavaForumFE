@@ -80,6 +80,7 @@ export default function TopicForum(): JSX.Element {
           topiclink={topic.topiclink}
           nsfw={JSON.parse(topic.nsfw)}
           user={topic.user.username}
+          type="default"
         />
       ) : null}
       <div className="text-center">
