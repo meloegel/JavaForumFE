@@ -103,28 +103,19 @@ export default function UserTopics(): JSX.Element {
       </div>
       {topics !== []
         ? topics.map((topic, key): any => (
-            <div className="flex flex-col"> 
-              <TopicCard
-                key={key}
-                topicname={topic.topicname}
-                topicbody={topic.topicbody}
-                topicphoto={topic.topicphoto}
-                topicvideo={topic.topicvideo}
-                topiclink={topic.topiclink}
-                nsfw={topic.nsfw}
-                user={topic.user.username}
-                onClick={() => handleOnTopicClick(topic.topicid)}
-                type="profile"
-              />
-              <div className="m-auto">
-             
-                <Button
-                  text="Delete"
-                  className="text-white"
-                  onClick={() => handleOnDeleteClick(topic.topicid)}
-                />
-              </div>
-            </div>
+            <TopicCard
+              key={key}
+              topicname={topic.topicname}
+              topicbody={topic.topicbody}
+              topicphoto={topic.topicphoto}
+              topicvideo={topic.topicvideo}
+              topiclink={topic.topiclink}
+              nsfw={topic.nsfw}
+              user={topic.user.username}
+              // onClick={() => handleOnTopicClick(topic.topicid)} //Both wont work with current design
+              onDeleteClick={() => handleOnDeleteClick(topic.topicid)}
+              type="profile"
+            />
           ))
         : null}
       <div className="text-center p-4">

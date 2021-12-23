@@ -10,6 +10,7 @@ export type TopicCardType = {
   nsfw: boolean;
   user: string;
   onClick?: () => void;
+  onDeleteClick?: () => void;
   type: "default" | "profile";
 };
 
@@ -73,13 +74,14 @@ function Profile({
   nsfw,
   user,
   onClick,
+  onDeleteClick
 }: TopicCardType): JSX.Element {
   return (
     <div
       className="bg-gray-800 p-4 w-1/5 mx-auto my-4 text-white text-lg"
       onClick={onClick}
     >
-    <FontAwesomeIcon icon={faTimes} className="p-2 z-0 float-right h-auto bg-red-600" size="3x" />
+    <FontAwesomeIcon icon={faTimes} className="p-2 z-0 float-right h-auto bg-red-600" size="3x" onClick={onDeleteClick} />
       <h3>
         Topic Name: <span className="text-2xl font-medium">{topicname}</span>
       </h3>
