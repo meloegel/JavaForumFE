@@ -49,22 +49,6 @@ export default function Home(): JSX.Element {
   return (
     <div>
       <h2 className="text-white text-center text-2xl p-4">Topics</h2>
-      {topics !== []
-        ? topics.map((topic, key): any => (
-            <TopicCard
-              key={key}
-              topicname={topic.topicname}
-              topicbody={topic.topicbody}
-              topicphoto={topic.topicphoto}
-              topicvideo={topic.topicvideo}
-              topiclink={topic.topiclink}
-              nsfw={topic.nsfw}
-              user={topic.user.username}
-              onClick={() => handleOnClick(topic.topicid)}
-              type="default"
-            />
-          ))
-        : null}
       <div className="flex justify-evenly w-1/3 m-auto p-4">
         <Button
           text="Add Topic"
@@ -83,6 +67,22 @@ export default function Home(): JSX.Element {
         />
         <Button text="Logout" className="text-white" onClick={handleLogout} />
       </div>
+      {topics !== []
+        ? topics.map((topic, key): any => (
+            <TopicCard
+              key={key}
+              topicname={topic.topicname}
+              topicbody={topic.topicbody}
+              topicphoto={topic.topicphoto}
+              topicvideo={topic.topicvideo}
+              topiclink={topic.topiclink}
+              nsfw={topic.nsfw}
+              user={topic.user.username}
+              onClick={() => handleOnClick(topic.topicid)}
+              type="default"
+            />
+          ))
+        : null}
     </div>
   );
 }
