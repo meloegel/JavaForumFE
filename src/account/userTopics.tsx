@@ -6,28 +6,26 @@ import useFetch from "../hooks/useFetch";
 
 export default function UserTopics(): JSX.Element {
   const navigate = useNavigate();
+  const [confirm, setConfirm] = useState(false);
+  const [topicid, setTopicid] = useState(0);
+  const [topics, setTopics] = useState([] as any[]);
+  const [userId, setUserId] = useState(0);
   const [getUserInfo, userInfo] = useFetch<any>();
   const [getUserTopics, userTopics] = useFetch<any>();
   const [deleteTopic] = useFetch<any>();
-  const [topics, setTopics] = useState([] as any[]);
-  const [userId, setUserId] = useState(0);
   const username = window.localStorage.getItem("username");
   const token = window.localStorage.getItem("token");
-  const [confirm, setConfirm] = useState(false);
-  const [topicid, setTopicid] = useState(0);
 
   const handleOnTopicClick = (id: number) => {
     navigate(`/forum/${id}`);
   };
 
   const handleOnDeleteClick = (topicid: number) => {
-    console.log(topicid);
     setConfirm(!confirm);
     setTopicid(topicid);
   };
 
   const handleOnDeleteConfirm = () => {
-    console.log(topicid);
     const headers = {
       "Content-Type": "application/json",
       Authorization: token!,

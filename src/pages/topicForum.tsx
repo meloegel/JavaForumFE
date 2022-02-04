@@ -21,13 +21,12 @@ export default function TopicForum(): JSX.Element {
   const navigate = useNavigate();
   const [topic, setTopic] = useState(initialTopicValues);
   const [comments, setComments] = useState([] as any[]);
-  const token = window.localStorage.getItem("token");
-  const topicid = window.location.href.split("/").slice(-1)[0];
   const [getTopic, topicData] = useFetch<any>();
   const [getComments, commentData] = useFetch<any>();
+  const token = window.localStorage.getItem("token");
+  const topicid = window.location.href.split("/").slice(-1)[0];
 
   useEffect(() => {
-    console.log(topicid);
     if (topicid) {
       const headers = {
         "Content-Type": "application/json",
@@ -41,7 +40,6 @@ export default function TopicForum(): JSX.Element {
   }, [token, getTopic, topicid]);
 
   useEffect(() => {
-    console.log(topicid);
     if (topicid) {
       const headers = {
         "Content-Type": "application/json",
@@ -55,14 +53,12 @@ export default function TopicForum(): JSX.Element {
   }, [token, getComments, topicid]);
 
   useEffect(() => {
-    console.log(topicData);
     if (topicData) {
       setTopic(topicData);
     }
   }, [topicData]);
 
   useEffect(() => {
-    console.log(commentData);
     if (commentData) {
       setComments(commentData);
     }

@@ -60,7 +60,6 @@ export default function Profile(): JSX.Element {
     if (userInfo) {
       setFormValues(userInfo);
       setUserId(userInfo.userid);
-      console.log(userInfo.userid);
     }
   }, [userInfo]);
 
