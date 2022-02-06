@@ -33,8 +33,7 @@ export default function Login(): JSX.Element {
     });
   };
 
-  const onSubmit = (evt: any) => {
-    evt.preventDefault();
+  const onSubmit = () => {
     const body = {
       grant_type: "password",
       username: formValues.username,
@@ -55,7 +54,6 @@ export default function Login(): JSX.Element {
 
   useEffect(() => {
     if (data) {
-      console.log("Success");
       localStorage.setItem("username", `${formValues.username}`);
       localStorage.setItem("token", `Bearer ${data.access_token}`);
       navigate("/home");
@@ -64,7 +62,7 @@ export default function Login(): JSX.Element {
 
   return (
     <div>
-      <form onSubmit={onSubmit} className="w-1/2 m-auto p-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="w-1/2 m-auto p-4">
         <h2 className="text-white text-center text-2xl">Login</h2>
         <div className="w-4/6 text-right p-4">
           <div className="p-2">
@@ -101,7 +99,7 @@ export default function Login(): JSX.Element {
           )}
         </div>
         <div className="flex justify-evenly p-6">
-          <Button text="Login" className="text-white" onClick={handleSubmit(() => {})} />
+          <Button text="Login" className="text-white" onClick={() => {}} />
           <Button
             text="Register"
             className="text-white"
