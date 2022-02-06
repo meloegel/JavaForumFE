@@ -25,8 +25,7 @@ export default function Register(): JSX.Element {
     resolver: yupResolver(registrationSchema),
   });
 
-  const onSubmit = (evt: any) => {
-    evt.preventDefault();
+  const onSubmit = () => {
     const body = {
       username: formValues.username,
       password: formValues.password,
@@ -45,8 +44,8 @@ export default function Register(): JSX.Element {
 
   useEffect(() => {
     if (data) {
-      console.log("Success");
       localStorage.setItem("token", `Bearer ${data.access_token}`);
+      localStorage.setItem("username", `${formValues.username}`);
       navigate("/home");
     }
   }, [data, navigate, formValues]);
@@ -62,7 +61,7 @@ export default function Register(): JSX.Element {
 
   return (
     <div>
-      <form onSubmit={onSubmit} className="w-1/2 m-auto p-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="w-1/2 m-auto p-4">
         <h2 className="text-white text-center text-2xl">Register</h2>
         <div className="w-4/6 text-right p-4">
           <div className="p-2 ">
@@ -118,7 +117,7 @@ export default function Register(): JSX.Element {
           <Button
             text="Register"
             className="text-white"
-            onClick={handleSubmit(() => {})}
+            onClick={() => {}}
           />
           <Button
             text="Login"
