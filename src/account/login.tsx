@@ -1,47 +1,32 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import * as yup from "yup";
 import Button from "../common/button";
 import useFetch from "../hooks/useFetch";
 import loginSchema from "../validation/loginSchema";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const initialFormValues = {
   username: "",
   password: "",
 };
 
-const initialFormErrors = {
-  username: "",
-  password: "",
-};
-
-const initialDisabled = true;
-
 export default function Login(): JSX.Element {
   const navigate = useNavigate();
   const [formValues, setFormValues] = useState(initialFormValues);
-  const [formErrors, setFormErrors] = useState(initialFormErrors);
-  const [disabled, setDisabled] = useState(initialDisabled);
   const [request, data] = useFetch<any>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    mode: "all",
+    resolver: yupResolver(loginSchema),
+  });
 
   const onInputChange = (evt: any) => {
     const name = evt.target.name;
     const value = evt.target.value;
-    yup
-      .reach(loginSchema, name)
-      .validate(value)
-      .then((valid: any) => {
-        setFormErrors({
-          ...formErrors,
-          [name]: "",
-        });
-      })
-      .catch((error: any) => {
-        setFormErrors({
-          ...formErrors,
-          [name]: error.errors[0],
-        });
-      });
     setFormValues({
       ...formValues,
       [name]: value,
@@ -77,12 +62,6 @@ export default function Login(): JSX.Element {
     }
   }, [data, navigate, formValues]);
 
-  useEffect(() => {
-    loginSchema.isValid(formValues).then((valid: any) => {
-      setDisabled(!valid);
-    });
-  }, [formValues]);
-
   return (
     <div>
       <form onSubmit={onSubmit} className="w-1/2 m-auto p-4">
@@ -91,6 +70,7 @@ export default function Login(): JSX.Element {
           <div className="p-2">
             <label className="text-white mr-2">Username</label>
             <input
+              {...register("username")}
               className="bg-gray-200 border border-black m-2"
               value={formValues.username}
               onChange={onInputChange}
@@ -98,9 +78,15 @@ export default function Login(): JSX.Element {
               type="text"
             />
           </div>
+          {errors.username && (
+            <p className="text-red-600 text-xs m-2">
+              {errors.username?.message}
+            </p>
+          )}
           <div className="p-2">
             <label className="text-white mr-2">Password</label>
             <input
+              {...register("password")}
               className="bg-gray-200 border border-black m-2"
               value={formValues.password}
               onChange={onInputChange}
@@ -108,18 +94,14 @@ export default function Login(): JSX.Element {
               type="text"
             />
           </div>
-        </div>
-        <div>
-          <div>{formErrors.username}</div>
-          <div>{formErrors.password}</div>
+          {errors.password && (
+            <p className="text-red-600 text-xs m-2">
+              {errors.password?.message}
+            </p>
+          )}
         </div>
         <div className="flex justify-evenly p-6">
-          <Button
-            text="Login"
-            disabled={disabled}
-            className="text-white"
-            onClick={() => {}}
-          />
+          <Button text="Login" className="text-white" onClick={handleSubmit(() => {})} />
           <Button
             text="Register"
             className="text-white"

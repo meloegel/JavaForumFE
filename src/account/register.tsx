@@ -1,4 +1,3 @@
-import * as yup from "yup";
 import { useEffect, useState } from "react";
 import Button from "../common/button";
 import registrationSchema from "../validation/registrationSchema";
