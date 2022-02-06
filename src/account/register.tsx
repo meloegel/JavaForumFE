@@ -13,15 +13,10 @@ const initialFormValues = {
   email: "",
 };
 
-// const initialFormErrors = {
-//   username: "",
-//   password: "",
-//   email: "",
-// };
-const initialDisabled = true;
-
 export default function Register(): JSX.Element {
   const navigate = useNavigate();
+  const [formValues, setFormValues] = useState(initialFormValues);
+  const [request, data] = useFetch<any>();
   const {
     register,
     handleSubmit,
@@ -30,10 +25,6 @@ export default function Register(): JSX.Element {
     mode: "all",
     resolver: yupResolver(registrationSchema),
   });
-  const [formValues, setFormValues] = useState(initialFormValues);
-  // const [formErrors, setFormErrors] = useState(initialFormErrors);
-  const [disabled, setDisabled] = useState(initialDisabled);
-  const [request, data] = useFetch<any>();
 
   const onSubmit = (evt: any) => {
     evt.preventDefault();
@@ -64,34 +55,11 @@ export default function Register(): JSX.Element {
   const onInputChange = (evt: any) => {
     const name = evt.target.name;
     const value = evt.target.value;
-    // yup
-    //   .reach(registrationSchema, name)
-    //   .validate(value)
-    //   .then((valid: any) => {
-    //     setFormErrors({
-    //       ...formErrors,
-    //       [name]: "",
-    //     });
-    //   })
-    //   .catch((error: any) => {
-    //     setFormErrors({
-    //       ...formErrors,
-    //       [name]: error.errors[0],
-    //     });
-    //   });
     setFormValues({
       ...formValues,
       [name]: value,
     });
   };
-
-  // useEffect(() => {
-  //   registrationSchema.isValid(formValues).then((valid: any) => {
-  //     setDisabled(!valid);
-  //   });
-  // }, [formValues]);
-
-  // https://www.npmjs.com/package/react-hook-form
 
   return (
     <div>
@@ -125,6 +93,11 @@ export default function Register(): JSX.Element {
               type="text"
             />
           </div>
+          {errors.password && (
+            <p className="text-red-600 text-xs m-2">
+              {errors.password?.message}
+            </p>
+          )}
           <div className="p-2">
             <label className="text-white mr-2">Email</label>
             <input
@@ -136,16 +109,15 @@ export default function Register(): JSX.Element {
               type="text"
             />
           </div>
+          {errors.email && (
+            <p className="text-red-600 text-xs m-2">
+              {errors.email?.message}
+            </p>
+          )}
         </div>
-        {/* <div>
-          <div>{formErrors.username}</div>
-          <div>{formErrors.password}</div>
-          <div>{formErrors.email}</div>
-        </div> */}
         <div className="flex justify-evenly p-6">
           <Button
             text="Register"
-            // disabled={disabled}
             className="text-white"
             onClick={handleSubmit(() => {})}
           />
