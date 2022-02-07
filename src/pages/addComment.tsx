@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Button from "../common/button";
 import useFetch from "../hooks/useFetch";
@@ -19,6 +20,7 @@ export default function AddComment(): JSX.Element {
   const username = window.localStorage.getItem("username");
   const token = window.localStorage.getItem("token");
   const topicid = window.location.href.split("/").slice(-1)[0];
+  const {handleSubmit} = useForm();
 
   const onInputChange = (evt: any) => {
     const name = evt.target.name;
@@ -30,7 +32,6 @@ export default function AddComment(): JSX.Element {
   };
 
   const onSubmit = (evt: any) => {
-    evt.preventDefault();
     const headers = {
       "Content-Type": "application/json",
       Authorization: token!,
@@ -73,7 +74,7 @@ export default function AddComment(): JSX.Element {
 
   return (
     <div>
-      <form onSubmit={onSubmit} className="m-auto">
+      <form onSubmit={handleSubmit(onSubmit)} className="m-auto">
         <h2 className="text-white text-3xl p-6">Add Comment</h2>
         <div className="p-4 text-left ">
           <div className="p-2 flex flex-col w-1/4">
