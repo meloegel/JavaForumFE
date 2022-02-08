@@ -13,6 +13,7 @@ const initialFormValues = {
 
 export default function AddComment(): JSX.Element {
   const navigate = useNavigate();
+  const {handleSubmit} = useForm();
   const [userId, setUserId] = useState(0);
   const [formValues, setFormValues] = useState(initialFormValues);
   const [getUserData, userData] = useFetch<any>();
@@ -20,7 +21,7 @@ export default function AddComment(): JSX.Element {
   const username = window.localStorage.getItem("username");
   const token = window.localStorage.getItem("token");
   const topicid = window.location.href.split("/").slice(-1)[0];
-  const {handleSubmit} = useForm();
+ 
 
   const onInputChange = (evt: any) => {
     const name = evt.target.name;
@@ -31,7 +32,7 @@ export default function AddComment(): JSX.Element {
     });
   };
 
-  const onSubmit = (evt: any) => {
+  const onSubmit = () => {
     const headers = {
       "Content-Type": "application/json",
       Authorization: token!,

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Button from "../common/button";
 import useFetch from "../hooks/useFetch";
@@ -11,6 +12,7 @@ const initialFormValues = {
 
 export default function Profile(): JSX.Element {
   const navigate = useNavigate();
+  const {handleSubmit} = useForm();
   const [formValues, setFormValues] = useState(initialFormValues);
   const [getUserInfo, userInfo] = useFetch<any>();
   const [setUserInfo, newUserInfo] = useFetch<any>();
@@ -72,7 +74,7 @@ export default function Profile(): JSX.Element {
 
   return (
     <div>
-      <form onSubmit={onSubmit} className="m-auto ">
+      <form onSubmit={handleSubmit(onSubmit)} className="m-auto ">
         <h2 className="text-white text-3xl p-6">Profile</h2>
         <div className="p-4 text-left ">
           <div className="p-2 flex flex-col w-1/4">

@@ -8,7 +8,7 @@ import Forum from "../pages/topicForum";
 import AddComment from "../pages/addComment";
 import UserTopics from "../account/userTopics";
 
-export default function AuthenticatedRouter(): JSX.Element {
+export default function Router(): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
