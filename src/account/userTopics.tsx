@@ -16,6 +16,12 @@ export default function UserTopics(): JSX.Element {
   const username = window.localStorage.getItem("username");
   const token = window.localStorage.getItem("token");
 
+   // eslint-disable-next-line react-hooks/exhaustive-deps
+   const headers = {
+      "Content-Type": "application/json",
+      Authorization: token!,
+    };
+
   const handleOnTopicClick = (id: number) => {
     navigate(`/forum/${id}`);
   };
@@ -26,10 +32,6 @@ export default function UserTopics(): JSX.Element {
   };
 
   const handleOnDeleteConfirm = () => {
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: token!,
-    };
     deleteTopic(`http://localhost:2019/topics/topic/${topicid}`, {
       method: "DELETE",
       headers: headers,
@@ -39,26 +41,18 @@ export default function UserTopics(): JSX.Element {
   };
 
   useEffect(() => {
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: token!,
-    };
     getUserInfo(`http://localhost:2019/users/user/name/${username}`, {
       method: "GET",
       headers: headers,
     });
-  }, [getUserInfo, token, username]);
+  }, [getUserInfo, headers, token, username]);
 
   useEffect(() => {
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: token!,
-    };
     getUserTopics(`http://localhost:2019/topics/topics/${userId}`, {
       method: "GET",
       headers: headers,
     });
-  }, [getUserTopics, token, userId]);
+  }, [getUserTopics, headers, token, userId]);
 
   useEffect(() => {
     if (userInfo) {
