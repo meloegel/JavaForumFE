@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import AuthenticatedRouter from "./router/router";
+import Router from "./router/router";
 
 ReactDOM.render(
   <React.StrictMode>
-    <AuthenticatedRouter />
+    <Router />
   </React.StrictMode>,
   document.getElementById("root")
 );
