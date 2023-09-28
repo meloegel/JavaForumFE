@@ -86,18 +86,17 @@ export default function TopicForum(): JSX.Element {
           onClick={() => navigate(`/add-comment/${topicid}`)}
         />
       </div>
-      {comments !== []
-        ? comments.map((comment, key): any => (
-            <CommentCard
-              key={key}
-              commentbody={comment.commentbody}
-              commentphoto={comment.commentphoto}
-              commentvideo={comment.commentvideo}
-              commentgif={comment.commentgif}
-              user={comment.user.username}
-            />
-          ))
-        : null}
+      {comments &&
+        comments.map((comment, key): any => (
+          <CommentCard
+            key={key}
+            commentbody={comment.commentbody}
+            commentphoto={comment.commentphoto}
+            commentvideo={comment.commentvideo}
+            commentgif={comment.commentgif}
+            user={comment.user.username}
+          />
+        ))}
     </div>
   );
 }
